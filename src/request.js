@@ -1,27 +1,24 @@
 import url from 'url';
 import { StringDecoder } from "string_decoder";
-import { decode } from 'punycode';
-import { rejects } from 'assert';
 
 const request = {};
-
 
 
 const parseUrl= rawRequest=>{
     let parsedUrl = url.parse(rawRequest.url,true);
 
-    request.host=parsedUrl.host;
-    request.query=parsedUrl.query;
-    request.pathname= parsedUrl.pathname.replace(/^\/+|\/+$/g,'');
-    request.path= parsedUrl.path;
+    request.host = parsedUrl.host;
+    request.query = parsedUrl.query;
+    request.pathname = parsedUrl.pathname.replace(/^\/+|\/+$/g,'');
+    request.path = parsedUrl.path;
 }
 
 const parseMethodName = rawRequest=>{
-    request.method=rawRequest.method.toUpperCase();
+    request.method = rawRequest.method.toUpperCase();
 }
 
 const parseHeaders = rawRequest=>{
-    request.headers= rawRequest.headers;
+    request.headers = rawRequest.headers;
 }
 
 const  parseBody = async rawRequest=> new Promise((resolve,rejects)=>{
@@ -36,9 +33,6 @@ const  parseBody = async rawRequest=> new Promise((resolve,rejects)=>{
     });
 });
    
-
-
-
 const parse = async (rawRequest)=>{
 
     parseUrl(rawRequest);
