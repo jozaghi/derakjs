@@ -1,2 +1,2 @@
-# Derak js
+# entire js
 ### simplified restful web framework
