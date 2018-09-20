@@ -10,7 +10,6 @@ const find=(method,path)=>{
         if(method!=route.method || method!='ALL')continue;
         var result=routeParser.match(path,route.pattern);
         if(result.isMatch){
-            console.log(result)
             return {
                 action:route.action,
                 parameters:result.parameters
