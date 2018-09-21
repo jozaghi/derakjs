@@ -2,11 +2,11 @@ const app = require('./src/app');
 
 app.get(
     '/user/:id',
-    validate={
-        id:"req|min(5)"
-    },
+    // validate= v=>({
+    //     id:v.req().min(3)        
+    // }),
     ctx=>{
-        ctx.ok(ctx.param.id);
+        ctx.ok(ctx.params.id);
     }
 );
 

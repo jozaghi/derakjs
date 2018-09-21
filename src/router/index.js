@@ -7,7 +7,7 @@ const routes=[];
 const find=(method,path)=>{
     for(let i=0;i<routes.length;i++){
         let route=routes[i];
-        if(method!=route.method || method!='ALL')continue;
+        if(method!=route.method || method=='ALL')continue;
         var result=routeParser.match(path,route.pattern);
         if(result.isMatch){
             return {
@@ -16,6 +16,7 @@ const find=(method,path)=>{
             };
         }
     }
+    return null;
 }
 
 const set = (method,path,action) =>{
@@ -27,13 +28,13 @@ const set = (method,path,action) =>{
     });
 }
 
-const run= async (req,res) =>{
-    var route=find(req.method,req.path);
+const run= async (ctx) =>{
+    var route=find(ctx.method,ctx.path);
     if(route!=null){
-        req.params=route.parameters;
-        route.action(req,res);
+        ctx.params=route.parameters;
+        route.action(ctx);
     }else{
-        res.end('404');
+        ctx.notFound();
     }
 }
 

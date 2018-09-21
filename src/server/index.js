@@ -5,7 +5,7 @@ var router = {};
 
 
 const server = http.createServer(
-    (req,res)=>context.parse(req,res).then(ctx=>router.run(ctx))
+    (req,res)=>context(req,res).then(ctx=>router.run(ctx))
 );
 
 const start = async (port=3000)=>  new Promise((resolve,reject)=>{

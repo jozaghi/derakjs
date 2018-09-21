@@ -28,7 +28,6 @@ const getParameters = path => {
 const build= path => {
     let parameters = getParameters(path);
     let parameterList = [];
-    console.log(parameters);
     parameters.map((param, index) => {
         if (param.hasPattern) {
             path = path.replace(param.path, "(?:(" + param.pattern + "))");
