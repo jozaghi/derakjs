@@ -11,7 +11,7 @@ const find=(method,path)=>{
         var result=routeParser.match(path,route.pattern);
         if(result.isMatch){
             return {
-                action:route.action,
+                actions:route.actions,
                 parameters:result.parameters
             };
         }
@@ -19,12 +19,12 @@ const find=(method,path)=>{
     return null;
 }
 
-const set = (method,path,action) =>{
+const set = (method,path,actions) =>{
     var pattern=routeParser.build(path);
     routes.push({
         method,
         pattern,
-        action
+        actions
     });
 }
 
@@ -32,28 +32,29 @@ const run= async (ctx) =>{
     var route=find(ctx.method,ctx.path);
     if(route!=null){
         ctx.params=route.parameters;
-        route.action(ctx);
+        ctx.setActions(route.actions);
+        ctx.getCurrentAction().call(null,ctx);
     }else{
         ctx.notFound();
     }
 }
 
-const get = (path,action)=>{
-    set('GET',path,action);
+const get = (path,...actions)=>{
+    set('GET',path,actions);
 }
-const post = (path,action) =>{
-    set('POST',path,action);
+const post = (path,...actions) =>{
+    set('POST',path,actions);
 }
-const put = (path,action) =>{
-    set('PUT',path,action);
+const put = (path,...actions) =>{
+    set('PUT',path,actions);
 }
-const patch = (path,action) =>{
-    set('PATCH',path,action);
+const patch = (path,...actions) =>{
+    set('PATCH',path,actions);
 }
-const del = (path,action) =>{
-    set('DELETE',path,action);
+const del = (path,...actions) =>{
+    set('DELETE',path,actions);
 }
-const all = (path,action) =>{
+const all = (path,...actions) =>{
     set('ALL',path,action);
 }
 
