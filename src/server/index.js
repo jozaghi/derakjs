@@ -5,7 +5,12 @@ var router = {};
 
 
 const server = http.createServer(
-    (req,res)=>context(req,res).then(ctx=>router.run(ctx))
+    (req,res)=>context(req,res)
+    .then(ctx=>router.run(ctx))
+    .catch(ex=>{
+        res.statusCode=500;
+        res.end(JSON.stringify(ex));
+    })
 );
 
 const start = async (port=3000)=>  new Promise((resolve,reject)=>{

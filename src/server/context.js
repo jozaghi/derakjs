@@ -1,11 +1,10 @@
+const errors = require("../util/errors");
 const request = require('./request');
 const response = require('./response');
 
-
-
 const next = function() {
     if (this.actions.length < this.currentActionIndex + 2) {
-      throw "there is no more actions";
+      errors.NEXT_ACTION_NOT_FOUND();
     }
     this.actions[++this.currentActionIndex](this);
 };
