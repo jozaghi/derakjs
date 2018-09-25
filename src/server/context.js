@@ -18,7 +18,7 @@ const getCurrentAction=function(){
 }
 
 module.exports=async function(req, res){
-
+   
     var requestContext =  await request(req);
     var responseContext = response(res);
 

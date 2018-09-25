@@ -1,7 +1,7 @@
 var res;
 
 const ok = data=>{
-    res.end(data);
+    res.end(JSON.stringify(data));
 }
 const notFound = ()=>{
     res.statusCode=404;

@@ -15,9 +15,9 @@ app.get(
     },
     ctx=>{
         ctx.s+="-3"
-        ctx.ok(ctx.s);
+        ctx.ok(ctx.params);
     },
 );
 
-app.start(3000)
-.then(()=>console.log("server is running on port 3000"));
+app.start(3001)
+.then(()=>console.log("server is running on port 3001"));

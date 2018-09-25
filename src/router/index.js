@@ -31,7 +31,10 @@ const set = (method,path,actions) =>{
 const run= async (ctx) =>{
     var route=find(ctx.method,ctx.path);
     if(route!=null){
-        ctx.params=route.parameters;
+        ctx.params={
+            ...ctx.params,
+            ...route.parameters
+        };
         ctx.setActions(route.actions);
         ctx.getCurrentAction().call(null,ctx);
     }else{
